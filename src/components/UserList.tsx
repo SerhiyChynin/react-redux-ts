@@ -4,15 +4,16 @@ import { useTypesSelectors } from '../hooks/useTypesSelectors';
 import { useDispatch } from 'react-redux';
 import { fetchUsers } from '../store/action-creators/user';
 import type {} from 'redux-thunk/extend-redux';
+import { useAction } from '../hooks/useActions';
 
 
 
 const UserList: React.FC = () => {
     const {users, error, loading} = useTypesSelectors(state => state.user);
-    const dispatch = useDispatch();
-    // console.log(state);
+    const {fetchUsers} = useAction();
+
     useEffect(() => {
-        dispatch(fetchUsers())
+        fetchUsers()
     }, [])
         if (loading) {
             return <h1>Идет загрузка...</h1>
